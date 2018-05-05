@@ -1,2 +1,4 @@
 .gitignore
 
+/jaca/nbproject/private/
+/jaca/build/
