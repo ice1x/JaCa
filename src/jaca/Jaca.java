@@ -5,6 +5,9 @@
  */
 package jaca;
 import javax.swing.JFrame;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 /**
  *
@@ -17,21 +20,45 @@ public class Jaca {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MyWindowApp app = new MyWindowApp(); //Создаем экземпляр нашего приложения
+        Calc app = new Calc(); //Создаем экземпляр нашего приложения
         app.setVisible(true); //С этого момента приложение запущено!
+        app.pack(); //Эта команда подбирает оптимальный размер в зависимости от содержимого окна
     }
     
 }
 
-class MyWindowApp extends JFrame { //Наследуя от JFrame мы получаем всю функциональность окна
 
-  public MyWindowApp(){
-    super("My First Window"); //Заголовок окна
-    setBounds(100, 100, 200, 200); //Если не выставить 
-                                   //размер и положение 
-                                   //то окно будет мелкое и незаметное
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //это нужно для того чтобы при 
-                                                    //закрытии окна закрывалась и программа,
-                                                    //иначе она останется висеть в процессах
-  }
+class Calc extends JFrame {
+    private int count = 0;
+    private JLabel countLabel;
+    private JButton One;
+    private JButton Two;
+    private JButton Plus;
+    private JButton Equal;
+    private JButton Clear;
+    
+    public Calc(){
+        super ("Calculator");
+        countLabel = new JLabel("Result:" + count);
+        One = new JButton("1");
+        Two = new JButton("2");
+        Plus = new JButton("+");
+        Equal = new JButton("=");
+        Clear = new JButton("C");
+        
+        //Подготавливаем временные компоненты
+        JPanel buttonsPanel = new JPanel(new FlowLayout()); 
+        //Расставляем компоненты по местам
+        add(countLabel, BorderLayout.NORTH); //О размещении компонент поговорим позже
+        
+        buttonsPanel.add(One);
+        buttonsPanel.add(Two);
+        buttonsPanel.add(Plus);
+        buttonsPanel.add(Equal);
+        buttonsPanel.add(Clear);
+        
+        add(buttonsPanel, BorderLayout.SOUTH);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
 }
