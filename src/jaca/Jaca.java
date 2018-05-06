@@ -99,7 +99,6 @@ class Calc extends JFrame {
         Equal.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 counter = counter + buf;
-                buf = 0;
                 updateCounter();
             }});
         Clear.addActionListener(new ActionListener(){
