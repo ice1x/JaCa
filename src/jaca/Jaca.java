@@ -29,7 +29,7 @@ public class Jaca {
 
 
 class Calc extends JFrame {
-    private int count = 0;
+    private int counter = 0;
     private int buf = 0;
     private JLabel countLabel;
     private JButton One;
@@ -39,13 +39,23 @@ class Calc extends JFrame {
     private JButton Clear;
     
     private void updateCounter() {
-        count = count + buf;
-        buf = 0;
-        countLabel.setText(":" + count);}; 
+        countLabel.setText(":" + counter);};
+    
+    public void actionPerformed(ActionEvent e){
+        if(counter == 0)
+        {
+            counter = 1;
+        }
+        else
+        {
+            counter = counter * 10 + 1;
+        }
+        updateCounter();
+        };
     
     public Calc(){
         super ("Calculator");
-        countLabel = new JLabel("Result:" + count);
+        countLabel = new JLabel("Result:" + counter);
         One = new JButton("1");
         Two = new JButton("2");
         Plus = new JButton("+");
@@ -65,7 +75,37 @@ class Calc extends JFrame {
         
         One.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                buf = buf + 1;
+                if(counter == 0){
+                counter = 1;}
+                else{
+                counter = counter * 10 + 1;}
+                updateCounter();
+            }});
+        
+        Two.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(counter == 0){
+                counter = 2;}
+                else{
+                counter = counter * 10 + 2;}
+                updateCounter();
+            }});
+        Plus.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                buf = counter;
+                counter = 0;
+                updateCounter();
+            }});
+        Equal.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                counter = counter + buf;
+                buf = 0;
+                updateCounter();
+            }});
+        Clear.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                counter = 0;
+                buf = 0;
                 updateCounter();
             }});
         add(buttonsPanel, BorderLayout.SOUTH);
