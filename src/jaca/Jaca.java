@@ -30,12 +30,18 @@ public class Jaca {
 
 class Calc extends JFrame {
     private int count = 0;
+    private int buf = 0;
     private JLabel countLabel;
     private JButton One;
     private JButton Two;
     private JButton Plus;
     private JButton Equal;
     private JButton Clear;
+    
+    private void updateCounter() {
+        count = count + buf;
+        buf = 0;
+        countLabel.setText(":" + count);}; 
     
     public Calc(){
         super ("Calculator");
@@ -57,8 +63,12 @@ class Calc extends JFrame {
         buttonsPanel.add(Equal);
         buttonsPanel.add(Clear);
         
+        One.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                buf = buf + 1;
+                updateCounter();
+            }});
         add(buttonsPanel, BorderLayout.SOUTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
 }
